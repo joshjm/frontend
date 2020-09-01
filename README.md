@@ -1,6 +1,6 @@
 # Safe Blues Dashboard
 
-Live [github pages site](https://joshjm.github.io/safeBluesDashboard/)
+Live [github pages site](https://safeblues.github.io/frontend/)
 
 See the [trello board](https://trello.com/b/zOFm4RfY/safeblues-dashboard) for updates on development. 
 
