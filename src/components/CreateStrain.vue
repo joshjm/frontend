@@ -105,9 +105,7 @@
 import DistributionGamma from "@/components/DistributionGamma.vue"
 import axios from "axios"
 import { mapState } from "vuex"
-import Schema from "@/pb/sb_pb"
-// import "google/protobuf/timestamp.proto";
-import proto from "google-protobuf"
+
 import { time } from "d3"
 export default {
   name: "CreateStrain",
@@ -169,24 +167,25 @@ export default {
   },
   methods: {
     sendData: function() {
-      const incubationGamma = new Schema.GammaDistribution()
-      incubationGamma.setShape(this.virusParameters.incubationShape)
-      incubationGamma.setRate(this.virusParameters.incubationRate)
+      // PROTOBUF/gRPC STUFF TO BE REPLACED BY REST
+      // const incubationGamma = new Schema.GammaDistribution()
+      // incubationGamma.setShape(this.virusParameters.incubationShape)
+      // incubationGamma.setRate(this.virusParameters.incubationRate)
 
-      const infectiousGamma = new Schema.GammaDistribution()
-      infectiousGamma.setShape(this.virusParameters.infectiousShape)
-      infectiousGamma.setRate(this.virusParameters.infectiousRate)
+      // const infectiousGamma = new Schema.GammaDistribution()
+      // infectiousGamma.setShape(this.virusParameters.infectiousShape)
+      // infectiousGamma.setRate(this.virusParameters.infectiousRate)
 
-      const mystrain = new Schema.Strand()
-      mystrain.setStrandId(this.virusParameters.strandId)
-      mystrain.setStartTime(this.virusParameters.startTimestamp)
-      mystrain.setEndTime(this.virusParameters.endTimestamp)
-      mystrain.setSeedingProbability(this.virusParameters.seedingProbability)
-      mystrain.setInfectionProbability(
-        this.virusParameters.infectionProbabilityMap
-      )
-      mystrain.setIncubationPeriod(this.virusParameters.incubationGamma)
-      mystrain.setInfectiousPeriod(this.virusParameters.infectiousGamma)
+      // const mystrain = new Schema.Strand()
+      // mystrain.setStrandId(this.virusParameters.strandId)
+      // mystrain.setStartTime(this.virusParameters.startTimestamp)
+      // mystrain.setEndTime(this.virusParameters.endTimestamp)
+      // mystrain.setSeedingProbability(this.virusParameters.seedingProbability)
+      // mystrain.setInfectionProbability(
+      //   this.virusParameters.infectionProbabilityMap
+      // )
+      // mystrain.setIncubationPeriod(this.virusParameters.incubationGamma)
+      // mystrain.setInfectiousPeriod(this.virusParameters.infectiousGamma)
 
       axios
         .post(this.safeBluesPostURL, this.virusParameters)
@@ -215,9 +214,11 @@ export default {
         milliseconds
       ]
       const date = new Date(...dateGenerationArray)
-      const timestamp = new proto.google.protobuf.Timestamp()
-      timestamp.fromDate(date)
-      return timestamp
+      // PROTOBUF STUFF
+      // const timestamp = new proto.google.protobuf.Timestamp()
+      // timestamp.fromDate(date)
+      // TODO fix the time stamp and remove legacy protos
+      return "TEST TIMESTAMP"
     }
   }
 }
