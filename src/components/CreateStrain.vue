@@ -49,8 +49,20 @@
           ></v-text-field>
           <h5>Virus Phenotype</h5>
           <v-text-field
-            v-model="virusParameters.infectionProbabilityMap"
-            label="Infection Probability"
+            v-model="virusParameters.infectionProbabilityMapP"
+            label="Infection Probability (p)"
+            required
+          ></v-text-field>
+
+          <v-text-field
+            v-model="virusParameters.infectionProbabilityMapK"
+            label="Infection Probability (k)"
+            required
+          ></v-text-field>
+
+          <v-text-field
+            v-model="virusParameters.infectionProbabilityMapL"
+            label="Infection Probability (l)"
             required
           ></v-text-field>
 
@@ -169,24 +181,19 @@ export default {
   },
   methods: {
     sendData: function() {
-      const incubationGamma = new Schema.GammaDistribution()
-      incubationGamma.setShape(this.virusParameters.incubationShape)
-      incubationGamma.setRate(this.virusParameters.incubationRate)
-
-      const infectiousGamma = new Schema.GammaDistribution()
-      infectiousGamma.setShape(this.virusParameters.infectiousShape)
-      infectiousGamma.setRate(this.virusParameters.infectiousRate)
 
       const mystrain = new Schema.Strand()
+      mystrain.setIncubationPeriodHoursAlpha(this.virusParameters.incubationShape)
+      mystrain.setIncubationPeriodHoursBeta(this.virusParameters.incubationRate)
+      mystrain.setInfectionPeriodHoursAlpha(this.virusParameters.infectionShape)
+      mystrain.setInfectionPeriodHoursBeta(this.virusParameters.infectionRate)
       mystrain.setStrandId(this.virusParameters.strandId)
       mystrain.setStartTime(this.virusParameters.startTimestamp)
       mystrain.setEndTime(this.virusParameters.endTimestamp)
       mystrain.setSeedingProbability(this.virusParameters.seedingProbability)
-      mystrain.setInfectionProbability(
-        this.virusParameters.infectionProbabilityMap
-      )
-      mystrain.setIncubationPeriod(this.virusParameters.incubationGamma)
-      mystrain.setInfectiousPeriod(this.virusParameters.infectiousGamma)
+      mystrain.setInfectionProbabilityMapP(this.virusParameters.infectionProbabilityMapP);
+      mystrain.setInfectionProbabilityMapK(this.virusParameters.infectionProbabilityMapK);
+      mystrain.setInfectionProbabilityMapL(this.virusParameters.infectionProbabilityMapL);
 
       axios
         .post(this.safeBluesPostURL, this.virusParameters)

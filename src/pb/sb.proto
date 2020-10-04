@@ -2,16 +2,19 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
-message GammaDistribution {
-    double shape = 1;
-    double rate = 2;
-}
 message Strand {
-    uint32 strand_id = 1;
+    int64 strand_id = 1;
     google.protobuf.Timestamp start_time = 2;
     google.protobuf.Timestamp end_time = 3;
     double seeding_probability = 4;
-    double infection_probability = 5;
-    GammaDistribution incubation_period = 6;
-    GammaDistribution infectious_period = 7; 
+    // the two parameters of the infection probability map
+    double infection_probability_map_p = 5;
+    double infection_probability_map_k = 6;
+    double infection_probability_map_l = 7;
+    // alpha and beta of the gamma distribution for incubation period
+    double incubation_period_hours_alpha = 8;
+    double incubation_period_hours_beta = 9;
+    // alpha and beta of the gamma distribution for infectious period
+    double infectious_period_hours_alpha = 10;
+    double infectious_period_hours_beta = 11;
 }
