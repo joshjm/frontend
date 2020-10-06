@@ -163,18 +163,7 @@ export default {
     sendData: function() {
       axios
         // .post(this.safeBluesPostURL, this.virusParameters)
-        .post(this.safeBluesPostURL, {
-          startTime: `${this.startDate}T${this.startTime}:00.000000Z`,
-          endTime: `${this.endDate}T${this.endTime}:00.000000Z`,
-          seedingProbability: this.seedingProbability,
-          infectionProbabilityMapP: this.infectionProbabilityMapP,
-          infectionProbabilityMapK: this.infectionProbabilityMapK,
-          infectionProbabilityMapL: this.infectionProbabilityMapL,
-          incubationPeriodHoursAlpha: this.incubationShape,
-          incubationPeriodHoursBeta: this.incubationRate,
-          infectionPeriodHoursAlpha: this.infectionShape,
-          infectionPeriodHoursBeta: this.infectionRate
-        })
+        .post(this.safeBluesPostURL, this.$store.state.virusParameters)
         .then(response => console.log(response))
         .catch(error => console.log(error))
         //then update the data store
