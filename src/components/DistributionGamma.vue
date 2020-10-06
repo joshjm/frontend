@@ -118,8 +118,14 @@ export default {
     // and move all the store calls to the computed?
     incubationShape() {
       this.updateData()
-      this.$store.commit("updateIncubationRate", this.incubationRate)
-      this.$store.commit("updateIncubationShape", this.incubationShape)
+      this.$store.commit(
+        "updateIncubationPeriodHoursAlpha",
+        this.incubationRate
+      )
+      this.$store.commit(
+        "updateIncubationPeriodHoursBeta",
+        this.incubationShape
+      )
       // TODO: move plotly.react into its own method for DRY
       Plotly.react(
         "plot",
@@ -132,8 +138,14 @@ export default {
     },
     incubationRate() {
       this.updateData()
-      this.$store.commit("updateIncubationRate", this.incubationRate)
-      this.$store.commit("updateIncubationShape", this.incubationShape)
+      this.$store.commit(
+        "updateIncubationPeriodHoursAlpha",
+        this.incubationRate
+      )
+      this.$store.commit(
+        "updateIncubationPeriodHoursBeta",
+        this.incubationShape
+      )
       Plotly.react(
         "plot",
         [
@@ -145,8 +157,14 @@ export default {
     },
     infectiousShape() {
       this.updateData()
-      this.$store.commit("updateInfectiousRate", this.infectiousRate)
-      this.$store.commit("updateInfectiousShape", this.infectiousShape)
+      this.$store.commit(
+        "updateInfectiousPeriodHoursAlpha",
+        this.infectiousRate
+      )
+      this.$store.commit(
+        "updateInfectiousPeriodHoursBeta",
+        this.infectiousShape
+      )
       Plotly.react(
         "plot",
         [
@@ -158,8 +176,14 @@ export default {
     },
     infectiousRate() {
       this.updateData()
-      this.$store.commit("updateInfectiousRate", this.infectiousRate)
-      this.$store.commit("updateInfectiousShape", this.infectiousShape)
+      this.$store.commit(
+        "updateInfectiousPeriodHoursAlpha",
+        this.infectiousRate
+      )
+      this.$store.commit(
+        "updateInfectiousPeriodHoursBeta",
+        this.infectiousShape
+      )
       Plotly.react(
         "plot",
         [
@@ -207,14 +231,23 @@ export default {
       this.layout,
       this.config
     )
-    this.$store.state.virusParameters.incubationShape =
+    // TODO refactor this block into the new parameter names
+    this.$store.commit(
+      "updateIncubationPeriodHoursAlpha",
       this.incubationMean ** 2 / this.incubationVariance
-    this.$store.state.virusParameters.incubationRate =
+    )
+    this.$store.commit(
+      "updateIncubationPeriodHoursBeta",
       this.incubationMean / this.incubationVariance
-    this.$store.state.virusParameters.infectiousShape =
+    )
+    this.$store.commit(
+      "updateInfectiousPeriodHoursAlpha",
       this.infectiousMean ** 2 / this.infectiousVariance
-    this.$store.state.virusParameters.infectiousRate =
+    )
+    this.$store.commit(
+      "updateInfectiousPeriodHoursBeta",
       this.infectiousMean / this.infectiousVariance
+    )
   }
 }
 </script>

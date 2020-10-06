@@ -3,19 +3,12 @@
     <v-row>
       <v-col cols="6">
         <DistributionGamma />
-        <p>Payload: {{ this.$store.state.virusParameters }}</p>
+        <p>Payload: {{this.$store.state.virusParameters}}</p>
       </v-col>
       <v-col cols="6">
         <v-form>
           <h4>Create New Strain</h4>
-
-          <v-text-field
-            v-model="virusParameters.strandID"
-            label="Strand ID"
-            required
-          ></v-text-field>
           <h5>Experimental Conditions</h5>
-
           <v-text-field
             v-model="startDate"
             label="startDate"
@@ -48,41 +41,54 @@
             required
           ></v-text-field>
           <h5>Virus Phenotype</h5>
+
           <v-text-field
-            v-model="virusParameters.infectionProbabilityMap"
-            label="Infection Probability"
+            v-model="virusParameters.infectionProbabilityMapP"
+            label="Infection Probability - P"
+            required
+          ></v-text-field>
+
+          <v-text-field
+            v-model="virusParameters.infectionProbabilityMapK"
+            label="Infection Probability - K"
+            required
+          ></v-text-field>
+
+          <v-text-field
+            v-model="virusParameters.infectionProbabilityMapK"
+            label="Infection Probability - L"
             required
           ></v-text-field>
 
           <v-layout row justify-space-between>
             <v-col cols="6">
               <v-text-field
-                v-model="virusParameters.incubationShape"
-                label="Incubation Shape"
+                v-model="virusParameters.incubationPeriodHoursAlpha"
+                label="Incubation Shape/Alpha"
                 required
               ></v-text-field>
             </v-col>
 
             <v-col cols="6">
               <v-text-field
-                v-model="virusParameters.incubationRate"
-                label="Incubation Rate"
+                v-model="virusParameters.incubationPeriodHoursBeta"
+                label="Incubation Rate/Beta"
                 required
               ></v-text-field>
             </v-col>
 
             <v-col cols="6">
               <v-text-field
-                v-model="virusParameters.infectiousShape"
-                label="infectious Shape"
+                v-model="virusParameters.infectiousPeriodHoursAlpha"
+                label="infectious Shape/Alpha"
                 required
               ></v-text-field>
             </v-col>
 
             <v-col cols="6">
               <v-text-field
-                v-model="virusParameters.infectiousRate"
-                label="infectious Rate"
+                v-model="virusParameters.infectiousPeriodHoursBeta"
+                label="infectious Rate/Beta"
                 required
               ></v-text-field>
             </v-col>
@@ -130,65 +136,45 @@ export default {
   watch: {
     startTime() {
       if (this.startTime && this.startDate) {
-        const startTimestamp = this.dateStringToTimestampConverter(
-          this.startDate,
-          this.startTime
-        )
-        this.$store.commit("updateStartTimestamp", startTimestamp)
+        const startTimestamp = `${this.startDate}T${this.startTime}:00.000000Z`
+        this.$store.commit("updateStartTime", startTimestamp)
       }
     },
     startDate() {
       if (this.startTime && this.startDate) {
-        const startTimestamp = this.dateStringToTimestampConverter(
-          this.startDate,
-          this.startTime
-        )
-        this.$store.commit("updateStartTimestamp", startTimestamp)
+        const startTimestamp = `${this.startDate}T${this.startTime}:00.000000Z`
+        this.$store.commit("updateStartTime", startTimestamp)
       }
     },
     endTime() {
       if (this.endTime && this.endDate) {
-        const endTimestamp = this.dateStringToTimestampConverter(
-          this.endDate,
-          this.endTime
-        )
-        this.$store.commit("updateEndTimestamp", endTimestamp)
+        const endTimestamp = `${this.endDate}T${this.endTime}:00.000000Z`
+        this.$store.commit("updateEndTime", endTimestamp)
       }
     },
     endDate() {
       if (this.endTime && this.endDate) {
-        const endTimestamp = this.dateStringToTimestampConverter(
-          this.endDate,
-          this.endTime
-        )
-        this.$store.commit("updateEndTimestamp", endTimestamp)
+        const endTimestamp = `${this.endDate}T${this.endTime}:00.000000Z`
+        this.$store.commit("updateEndTime", endTimestamp)
       }
     }
   },
   methods: {
     sendData: function() {
-      // PROTOBUF/gRPC STUFF TO BE REPLACED BY REST
-      // const incubationGamma = new Schema.GammaDistribution()
-      // incubationGamma.setShape(this.virusParameters.incubationShape)
-      // incubationGamma.setRate(this.virusParameters.incubationRate)
-
-      // const infectiousGamma = new Schema.GammaDistribution()
-      // infectiousGamma.setShape(this.virusParameters.infectiousShape)
-      // infectiousGamma.setRate(this.virusParameters.infectiousRate)
-
-      // const mystrain = new Schema.Strand()
-      // mystrain.setStrandId(this.virusParameters.strandId)
-      // mystrain.setStartTime(this.virusParameters.startTimestamp)
-      // mystrain.setEndTime(this.virusParameters.endTimestamp)
-      // mystrain.setSeedingProbability(this.virusParameters.seedingProbability)
-      // mystrain.setInfectionProbability(
-      //   this.virusParameters.infectionProbabilityMap
-      // )
-      // mystrain.setIncubationPeriod(this.virusParameters.incubationGamma)
-      // mystrain.setInfectiousPeriod(this.virusParameters.infectiousGamma)
-
       axios
-        .post(this.safeBluesPostURL, this.virusParameters)
+        // .post(this.safeBluesPostURL, this.virusParameters)
+        .post(this.safeBluesPostURL, {
+          startTime: `${this.startDate}T${this.startTime}:00.000000Z`,
+          endTime: `${this.endDate}T${this.endTime}:00.000000Z`,
+          seedingProbability: this.seedingProbability,
+          infectionProbabilityMapP: this.infectionProbabilityMapP,
+          infectionProbabilityMapK: this.infectionProbabilityMapK,
+          infectionProbabilityMapL: this.infectionProbabilityMapL,
+          incubationPeriodHoursAlpha: this.incubationShape,
+          incubationPeriodHoursBeta: this.incubationRate,
+          infectionPeriodHoursAlpha: this.infectionShape,
+          infectionPeriodHoursBeta: this.infectionRate
+        })
         .then(response => console.log(response))
         .catch(error => console.log(error))
         //then update the data store
@@ -200,25 +186,6 @@ export default {
             )
         )
         .catch(error => console.log(error))
-    },
-
-    dateStringToTimestampConverter: function(dateString, timeString) {
-      const dateArr = dateString.split("-")
-      const timeArr = timeString.split(":")
-      const seconds = 0
-      const milliseconds = 0
-      const dateGenerationArray = [
-        ...dateArr,
-        ...timeArr,
-        seconds,
-        milliseconds
-      ]
-      const date = new Date(...dateGenerationArray)
-      // PROTOBUF STUFF
-      // const timestamp = new proto.google.protobuf.Timestamp()
-      // timestamp.fromDate(date)
-      // TODO fix the time stamp and remove legacy protos
-      return "TEST TIMESTAMP"
     }
   }
 }

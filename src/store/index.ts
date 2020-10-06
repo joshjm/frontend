@@ -6,47 +6,63 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     virusParameters: {
-      strandId: null,
-      startTimestamp: null,
-      endTimestamp: null,
+      startTime: null,
+      endTime: null,
       seedingProbability: null,
-      infectionProbabilityMap: null,
-      incubationShape: null,
-      incubationRate: null,
-      infectiousShape: null,
-      infectiousRate: null
+      infectionProbabilityMapP: null,
+      infectionProbabilityMapK: null,
+      infectionProbabilityMapL: null,
+      incubationPeriodHoursAlpha: null,
+      incubationPeriodHoursBeta: null,
+      infectiousPeriodHoursAlpha: null,
+      infectiousPeriodHoursBeta: null
     },
     jsonCovidAPIData: [],
     safeBluesData: [],
     safeBluesURL: "https://api.safeblues.org/admin/list"
   },
   mutations: {
+    // updating all virus params  
     updateVirusParameters(state, virusParameters) {
       state.virusParameters = virusParameters
     },
-    updateIncubationShape(state, newShape) {
-      state.virusParameters.incubationShape = newShape
+    // update individual virus params
+    updateStartTime(state, payload) {
+      state.virusParameters.startTime = payload
     },
-    updateIncubationRate(state, newRate) {
-      state.virusParameters.incubationRate = newRate
+    updateEndTime(state, payload) {
+      state.virusParameters.endTime = payload
     },
-    updateInfectiousShape(state, newShape) {
-      state.virusParameters.infectiousShape = newShape
+    updateSeedingProbability(state, payload) {
+      state.virusParameters.seedingProbability = payload
     },
-    updateInfectiousRate(state, newRate) {
-      state.virusParameters.infectiousRate = newRate
+    updateInfectionProbabilityMapP(state, payload) {
+      state.virusParameters.infectionProbabilityMapP = payload
     },
+    updateInfectionProbabilityMapK(state, payload) {
+      state.virusParameters.infectionProbabilityMapK = payload
+    },
+    updateInfectionProbabilityMapL(state, payload) {
+      state.virusParameters.infectionProbabilityMapL = payload
+    },
+    updateIncubationPeriodHoursAlpha(state, payload) {
+      state.virusParameters.incubationPeriodHoursAlpha = payload
+    },
+    updateIncubationPeriodHoursBeta(state, payload) {
+      state.virusParameters.incubationPeriodHoursBeta = payload
+    },
+    updateInfectiousPeriodHoursAlpha(state, payload) {
+      state.virusParameters.infectiousPeriodHoursAlpha = payload
+    },
+    updateInfectiousPeriodHoursBeta(state, payload) {
+      state.virusParameters.infectiousPeriodHoursBeta = payload
+    },
+    // storing data from GET requests
     storeSafeBluesData(state, safeBluesData) {
       state.safeBluesData = safeBluesData
     },
     storeCovidData(state, covidData) {
       state.jsonCovidAPIData = covidData
-    },
-    updateStartTimestamp(state, timestamp) {
-      state.virusParameters.startTimestamp = timestamp;
-    },
-    updateEndTimestamp(state, timestamp) {
-      state.virusParameters.endTimestamp = timestamp;
     }
   },
   actions: {},
