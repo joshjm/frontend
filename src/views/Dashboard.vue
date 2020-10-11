@@ -83,6 +83,7 @@ export default {
     // get data from covid19 api
     // NOTE: keeping out of the active-plot component as other components may need this data
     if (
+      // TODO always make the safeblues fetch to update/reflect new strains
       this.$store.state.safeBluesData.length == 0 ||
       this.$store.state.jsonCovidAPIData.length == 0
     ) {
