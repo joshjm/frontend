@@ -3,10 +3,10 @@ import VueRouter, { RouteConfig } from "vue-router"
 
 Vue.use(VueRouter)
 
-import Home from "../views/Home.vue"
-import About from "../views/About.vue"
-import Dashboard from "../views/Dashboard.vue"
-import Admin from "../views/Admin.vue"
+import Home from "@/views/Home.vue"
+import About from "@/views/About.vue"
+import Dashboard from "@/views/Dashboard.vue"
+import Admin from "@/views/Admin.vue"
 
 const routes: Array<RouteConfig> = [
   {
