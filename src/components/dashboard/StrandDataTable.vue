@@ -23,12 +23,16 @@ export default {
       // TODO: generate headers programatically based on what is in the strand. 
       headers: [
         { text: "strandId", value: "strandId" },
-        { text: "endTime", value: "endTime" },
-        { text: "incubationPeriodDays", value: "incubationPeriodDays" },
-        { text: "infectionProbability", value: "infectionProbability" },
-        { text: "infectiousPeriodDays", value: "infectiousPeriodDays" },
         { text: "seedingProbability", value: "seedingProbability" },
-        { text: "startTime", value: "startTime" }
+        { text: "infection Map P", value: "infectionProbabilityMapP" },
+        { text: "infection Map K", value: "infectionProbabilityMapK" },
+        { text: "infection Map L", value: "infectionProbabilityMapL" },
+        { text: "incubation Alpha", value: "incubationPeriodHoursAlpha" },
+        { text: "incubation Beta", value: "incubationPeriodHoursBeta" },
+        { text: "infectious Alpha", value: "infectiousPeriodHoursAlpha" },
+        { text: "infectious Beta", value: "infectiousPeriodHoursBeta" },
+        { text: "startTime", value: "startTime" },
+        { text: "endTime", value: "endTime" }
       ]
     }
   }
