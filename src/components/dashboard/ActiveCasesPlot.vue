@@ -1,5 +1,5 @@
 <template>
-    <div id="active-plot"></div>
+  <div id="active-plot"></div>
 </template>
 
 <script>
@@ -11,8 +11,7 @@ export default {
       layout: {
         title: "Active cases"
       },
-      config: { responsive: true,
-      displayModeBar: false}
+      config: { responsive: true, displayModeBar: false }
     }
   },
   computed: {

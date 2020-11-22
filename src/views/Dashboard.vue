@@ -9,14 +9,13 @@
         src="../assets/logo.svg"
       />
     </div>
-    
+
     <div
       v-show="
         $store.state.jsonCovidAPIData.length !== 0 &&
           $store.state.safeBluesData.length !== 0
       "
     >
-     
       <!-- <v-data-table
       :headers="headers"
       :items="jsonCovidAPIData"
@@ -24,8 +23,8 @@
       class="elevation-1"
     >
       </v-data-table>-->
-   
-     <v-row>
+
+      <v-row>
         <v-col cols="12">
           <StrandDataTable />
         </v-col>
@@ -34,20 +33,19 @@
           <!-- TODO: remove the bind, and fetch that data from vuex store -->
           <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
         </v-col>
-      </v-row>    
+      </v-row>
       <v-row>
         <v-col cols="12">
           <confirmed-cases-plot
             v-bind:jsonCovidAPIData="this.jsonCovidAPIData"
           />
         </v-col>
-      
+
         <v-col cols="12">
           <active-cases-plot v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
         </v-col>
       </v-row>
-  
-      </div>
+    </div>
   </div>
 </template>
 

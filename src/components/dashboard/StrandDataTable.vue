@@ -20,7 +20,7 @@ export default {
     return {
       sortBy: "Date",
       descending: true,
-      // TODO: generate headers programatically based on what is in the strand. 
+      // TODO: generate headers programatically based on what is in the strand.
       headers: [
         { text: "strandId", value: "strandId" },
         { text: "seedingProbability", value: "seedingProbability" },

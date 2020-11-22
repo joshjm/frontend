@@ -22,7 +22,7 @@ export default new Vuex.Store({
     safeBluesURL: "https://api.safeblues.org/admin/list"
   },
   mutations: {
-    // updating all virus params  
+    // updating all virus params
     updateVirusParameters(state, virusParameters) {
       state.virusParameters = virusParameters
     },

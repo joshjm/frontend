@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="6">
         <DistributionGamma />
-        <p>Payload: {{this.$store.state.virusParameters}}</p>
+        <p>Payload: {{ this.$store.state.virusParameters }}</p>
       </v-col>
       <v-col cols="6">
         <v-form>
@@ -112,7 +112,6 @@ import DistributionGamma from "@/components/DistributionGamma.vue"
 import axios from "axios"
 import { mapState } from "vuex"
 
-import { time } from "d3"
 export default {
   name: "CreateStrain",
   components: {
