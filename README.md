@@ -25,13 +25,14 @@ To push build to production (github pages)
 After ensuring `deploy.sh` is executable with `chmod +x deploy.sh`.
 
 
-compiling protos
+# local testing
 
-``` proto3
-protoc -I. --js_out=import_style=commonjs,binary:. sb.proto 
+brew install nginx, and `nginx -g daemon off`
+or npm run serve`
 
-protoc -I. --js_out="import_style=commonjs,binary:." sb.proto
 
-from root
-protoc --js_out=import_style=commonjs,binary:. ./src/pb/sb.proto 
-```
+ # Working with docker
+
+ build via `docker build -t safeblues/frontend .`
+
+run via `docker run -it -p 8080:80 --rm --name frontend safeblues/frontend`
