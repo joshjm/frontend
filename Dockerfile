@@ -17,7 +17,7 @@ RUN npm install react-scripts@3.4.1 -g
 
 # add app
 COPY ./react-app ./
-RUN npm run build
+# RUN npm run build
 # set default port
 ENV PORT=$PORT
 EXPOSE 8080
