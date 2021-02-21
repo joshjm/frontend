@@ -1,22 +1,24 @@
+# pull official base image
 FROM node:lts-alpine
 
-# install simple http server for serving static content
+# set working directory
 RUN npm install -g http-server
 
-# make the 'app' folder the current working directory
 WORKDIR /app
 
-# copy both 'package.json' and 'package-lock.json' (if available)
-COPY package*.json ./
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-# install project dependencies
+# install app dependencies
+COPY package*.json ./
 RUN npm install
 
-# copy project files and folders to the current working directory (i.e. 'app' folder)
-COPY . .
+RUN npm install react-scripts@3.4.1 -g
 
-# build app for production with minification
+# add app
+COPY ./react-app ./
 RUN npm run build
-
-EXPOSE 8080
-CMD [ "http-server", "dist" ]
+ENV PORT=8080
+EXPOSE $PORT
+# start app
+CMD http-server build -p $PORT
