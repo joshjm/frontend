@@ -18,7 +18,8 @@ RUN npm install react-scripts@3.4.1 -g
 # add app
 COPY ./react-app ./
 RUN npm run build
-ENV PORT=8080
-EXPOSE $PORT
+# set default port
+ENV PORT=$PORT
+EXPOSE 8080
 # start app
-CMD http-server build -p $PORT
+CMD ["http-server", "build", "-p", "8080"]
