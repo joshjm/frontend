@@ -1,33 +1,25 @@
 # Safe Blues Dashboard
+## local testing and development
 
-Live [github pages site](https://safeblues.github.io/frontend/)
+```docker-compose build frontend-dev && docker-compose run frontend-dev```
 
-See the [trello board](https://trello.com/b/zOFm4RfY/safeblues-dashboard) for updates on development. 
+## testing prod build
 
-Dependencies:
-- plotly for plots
-- mathjs for gamma function
-- google-protobuf for protobuffers
-- 
-## Setup
-To run development server locally:
+```docker-compose build frontend && docker-compose run frontend```
+
+## Running tests
+
+for interacting with the test suite:
 ```
-git clone https://github.com/joshjm/safeBluesDashboard.git
-cd safeBluesDashboard
-npm install
-npm run serve
+dc up frontend-dev
+docker ps # get the container id
+docker exec -it 413eaf851c79 npm run test
+```
+or for live reload without interactivity:
+```
+dc up tests
 ```
 
-To push build to production (github pages)
-```
-./deploy.sh
-```
-After ensuring `deploy.sh` is executable with `chmod +x deploy.sh`.
-
-
-# local testing
-
-`npm run start` from inside the react frontend dir. 
  # Working with docker
 
  build via `docker build -t safeblues/frontend .`

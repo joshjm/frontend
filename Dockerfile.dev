@@ -5,7 +5,7 @@ FROM node:alpine
 WORKDIR /app
 
 # install app dependencies
-COPY package*.json ./
+COPY ./react-app/package*.json ./
 RUN npm install
 
 # add app/or mount volume
