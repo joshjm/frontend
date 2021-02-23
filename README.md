@@ -19,24 +19,3 @@ or for live reload without interactivity:
 ```
 dc up tests
 ```
-
- # Working with docker
-
- build via `docker build -t safeblues/frontend .`
-
-run via `docker run -it -p 8080:80 --rm --name frontend safeblues/frontend`
-
-or use a docker compose 
-
-```
-version: '3'
-
-services:
-  frontend:
-    build: ./frontend
-    image: safeblues/frontend
-    environment:
-      - ENV=development
-    ports:
-      - 8080:8080
-```
