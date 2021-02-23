@@ -1,0 +1,17 @@
+# pull official base image
+FROM node:alpine
+
+# set working directory
+WORKDIR /app
+
+# install app dependencies
+COPY package*.json ./
+RUN npm install
+
+# add app
+# COPY ./react-app ./
+# set default port
+ENV PORT=$PORT
+EXPOSE 8080
+# start app
+CMD ["npm", "run", "start"]

@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:lts-alpine
+FROM node:alpine
 
 # set working directory
 RUN npm install -g http-server
