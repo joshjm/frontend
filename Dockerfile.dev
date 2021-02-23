@@ -8,8 +8,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# add app
-# COPY ./react-app ./
+# add app/or mount volume
+COPY ./react-app ./
 # set default port
 ENV PORT=$PORT
 EXPOSE 8080

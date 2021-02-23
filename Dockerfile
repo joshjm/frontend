@@ -6,20 +6,14 @@ RUN npm install -g http-server
 
 WORKDIR /app
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
 # install app dependencies
 COPY package*.json ./
 RUN npm install
 
-RUN npm install react-scripts@3.4.1 -g
-
 # add app
 COPY ./react-app ./
-# RUN npm run build
-# set default port
-ENV PORT=$PORT
-EXPOSE 8080
+RUN npm run build
+# clean up the files not needed in the final image
+RUN rm -rf node_modules public src
 # start app
-CMD ["http-server", "build", "-p", "8080"]
+CMD ["http-server", "build", "-p", "3000"]
